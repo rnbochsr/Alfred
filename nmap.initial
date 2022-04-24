@@ -1,0 +1,10 @@
+# Nmap 7.80 scan initiated Sun Apr 24 12:24:54 2022 as: nmap -p- -Pn -T5 -oN nmap.initial 10.10.2.139
+Nmap scan report for 10.10.2.139
+Host is up (0.088s latency).
+Not shown: 65532 filtered ports
+PORT     STATE SERVICE
+80/tcp   open  http
+3389/tcp open  ms-wbt-server
+8080/tcp open  http-proxy
+
+# Nmap done at Sun Apr 24 12:27:40 2022 -- 1 IP address (1 host up) scanned in 165.74 seconds
