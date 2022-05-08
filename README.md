@@ -40,7 +40,7 @@ Find a feature of the tool that allows you to execute commands on the underlying
 
 You first need to download the Powershell script, and make it available for the server to download. You can do this by creating a http server with python: _python3 -m http.server_
 
-It took some time and research into Jenkins to figure out that I needed to be in the `project` directory and then use the `Configure` link to be able to enter the command for the server. Then it took a few tries to figure out you need to click the `Build Now` linnk to get the server to run the code.
+It took some time and research into Jenkins to figure out that I needed to be in the `project` directory and then use the `Configure` link to be able to enter the command for the server. Then it took a few tries to figure out you need to click the `Build Now` link to get the server to run the code.
 
 The process is: 
 * Start the local web server in th directory where the PowerShell script is located:
@@ -182,6 +182,7 @@ PS C:\Program Files (x86)\Jenkins\secrets> type master.key
 And a `master.key` file also. Those kind of things always come in handy.
 
 Continued searching in directories until I found the user.txt file.
+
 *Question 4: What is the user.txt flag?*
 ```powershell
 PS C:\Users\bruce\Desktop> dir
@@ -292,11 +293,11 @@ This is noted in the terminal when you create the payload in msfvenom and from t
 ## Task 3 - Privilege Escalation
 Now that we have initial access, let's use token impersonation to gain system access.
 
-Windows uses tokens to ensure that accounts have the right privileges to carry out particular actions. Account tokens are assigned to an account when users log in or are authenticated. This is usually done by LSASS.exe(think of this as an authentication process).
+Windows uses tokens to ensure that accounts have the right privileges to carry out particular actions. Account tokens are assigned to an account when users log in or are authenticated. This is usually done by LSASS.exe (think of this as an authentication process).
 
 This access token consists of:
 
--   user SIDs(security identifier)
+-   user SIDs (security identifier)
 -   group SIDs
 -   privileges
 
@@ -305,7 +306,7 @@ amongst other things. More detailed information can be found [here](https://docs
 There are two types of access tokens:
 
 -   primary access tokens: those associated with a user account that are generated on log on
--   impersonation tokens: these allow a particular process(or thread in a process) to gain access to resources using the token of another (user/client) process
+-   impersonation tokens: these allow a particular process (or thread in a process) to gain access to resources using the token of another (user/client) process
 
 For an impersonation token, there are different levels:
 
@@ -316,7 +317,7 @@ For an impersonation token, there are different levels:
 
 where the security context is a data structure that contains users' relevant security information.
 
-The privileges of an account(which are either given to the account when created or inherited from a group) allow a user to carry out particular actions. Here are the most commonly abused privileges:
+The privileges of an account (which are either given to the account when created or inherited from a group) allow a user to carry out particular actions. Here are the most commonly abused privileges:
 
 -   SeImpersonatePrivilege
 -   SeAssignPrimaryPrivilege
