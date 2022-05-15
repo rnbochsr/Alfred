@@ -43,7 +43,7 @@ You first need to download the Powershell script, and make it available for the 
 It took some time and research into Jenkins to figure out that I needed to be in the `project` directory and then use the `Configure` link to be able to enter the command for the server. Then it took a few tries to figure out you need to click the `Build Now` link to get the server to run the code.
 
 The process is: 
-* Start the local web server in th directory where the PowerShell script is located:
+* Start the local web server in the directory where the PowerShell script is located:
 ```bash
 ┌──(bradley㉿kali)-[~/THM/Alfred]
 └─$ python3 -m http.server 8000
